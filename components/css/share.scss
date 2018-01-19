@@ -27,13 +27,16 @@
 	$baseColor: #df0024;
 
 	.zmiti-seal {
-		width: 6rem;
-		margin: 1rem auto;
-		@include pos(r);
+		width: 5rem;
+		height: 2rem;
+		border:1px solid transparent;
+		margin: 0 auto;
 
+		@include pos(r);
+		top:.4rem;
 		div {
 			@include pos(a);
-			top: .7rem;
+			top: .4rem;
 			font-size: .7rem;
 			color: #fff;
 			width: 100%;

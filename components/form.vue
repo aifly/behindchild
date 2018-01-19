@@ -135,7 +135,7 @@
 	import $ from 'jquery';
 	import Toast from './toast.vue';
 	export default {
-		props:['show'],
+		props:['show','obserable'],
 		name:'zmiti-form',
 		components:{
 			Toast
@@ -167,8 +167,8 @@
 					sex:-1,
 					userage:'',
 					nation:'汉',
-					address1:'北京',
-					address2:'湖北',
+					address1:'',
+					address2:'',
 					gname:'fly',
 					mobile:'15718827182',
 					content:"",
@@ -227,14 +227,25 @@
 					this.showToast('请填写民族');
 					return;
 				}
+				if(s.ajaxData.sex === -1){
+					this.showToast('请填写性别');
+					return;
+				}
 				
 				$.ajax({
 					url:window.protocol + '//api.zmiti.com/v2/h5/add_question/',
 					type:'post',
 					data:s.ajaxData
 					}).done((data)=>{
+						console.log(data);
 					if(data.getret === 0){
-						this.showToast();
+						s.showToast();
+						setTimeout(()=>{
+							$('.iScrollLoneScrollbar').hide();
+							s.$emit('entry',s.ajaxData.address1,s.ajaxData.address2,s.ajaxData.mobile);
+
+						},2000)				
+
 					}
 				})
 		    },
@@ -261,6 +272,9 @@
 
 							this.city2 = this.province1[0].children[0].label;
 							this.pros2 = this.province1[0].label;
+
+							this.ajaxData.address1 = this.province1[0].children[0].label;
+							this.ajaxData.address2 = this.province1[0].children[0].label;
 						}
 					}
 				})
@@ -269,11 +283,22 @@
 		mounted(){
 
 			this.fillCitys()
-			var scroll = new IScroll(this.$refs['zmiti-form'],{scrollbars:true});
+			
 
-			setTimeout(()=>{
-				scroll.refresh();
-			},1000)
+			var {obserable} = this;
+			obserable.on('entryForm',()=>{
+				setTimeout(()=>{
+					
+					var scroll = new IScroll(this.$refs['zmiti-form'],{scrollbars:true});
+					this.scroll = scroll;
+					
+					setTimeout(()=>{
+						scroll.refresh();
+					},1000)
+				},100)
+			});
+
+
 		}
 	}
 </script>

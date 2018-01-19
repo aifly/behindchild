@@ -1,27 +1,28 @@
 <template>
-	<div v-if='show' class="lt-full zmiti-share-main-ui" >
+	<div ref='share' v-if='show' class="lt-full zmiti-share-main-ui" :style='{height:viewH+"px",overflow:"hidden"}' >
 		<div :style="{background: 'url('+imgs.share+') no-repeat center top',backgroundSize:'cover'}">
+			<Toast :msg='showToastMsg'></Toast>
 			<h1 class="zmiti-fill-height">
-				<div class="zmiti-dis">{{km}}km</div>
+				<div class="zmiti-dis">-{{km}}km</div>
 				<div class="zmiti-address1">{{address1}}出发</div>
 				<div class="zmiti-address2">{{address2}}到达</div>
 			</h1>
 		
 			<div class="zmiti-help-text">我与父母的距离，只差你的助攻</div>
 			
-			<div v-if='!beginHelp'>
+			<div v-if='!beginHelp' style="height:2rem;border:1px solid transparent;">
 				<div class="zmiti-help-num">
 					已经有<span>{{count}}</span>人为TA助攻
 				</div>
 				<div class="zmiti-help-km">
-					共缩短<span>{{scaleKm}}</span>km里程
+					共缩短<span>{{km}}</span>km里程
 				</div>
 			</div>
 			<div v-if='beginHelp' class="zmiti-seal">
 				<img :src='imgs.seal'/>
 				<div>{{helpDis}}</div>
 			</div>
-			<div class="zmiti-help-btn">
+			<div class="zmiti-help-btn" @click='helpChild'>
 				<img :src='imgs.help' alt="">
 			</div>
 
@@ -48,16 +49,22 @@
 				<img :src='imgs.logo1'>
 			</div>
 		</div>
+		
 	</div>
 </template>
 <script>
 	import './css/share.css';
-	import imgs from './assets.js'
+	import imgs from './assets.js';
+	import $ from 'jquery';
+	import Toast from './toast.vue';
+	import IScroll from 'iscroll'
 	export default {
 		name:'zmiti-result',
-		props:['show','mobile','address1','address2'],
+		props:['show','mobile','address1','address2','qid'],
 		data(){
 			return {
+				showToastMsg:'',
+				viewH:document.documentElement.clientHeight,
 				helpClassify:[
 					{
 						dis:.1,
@@ -118,11 +125,94 @@
 				]
 			}
 		},
+		components:{
+			Toast
+		},
 		methods:{
+			showToast(msg='助力成功！！！',time=2000){
+		    	this.showToastMsg = msg;
+				setTimeout(()=>{
+					this.showToastMsg = '';
+				},time)
+		    },
+			helpChild(){
 
+				this.beginHelp = true;
+
+				this.timer = setInterval(()=>{
+
+					var index = (Math.random()*this.helpClassify.length)|0;
+					this.helpDis = this.helpClassify[index].dis;
+					this.level = index;
+
+				},100);
+
+				setTimeout(()=>{
+					clearInterval(this.timer);
+					var s = this;
+					$.ajax({
+						type:'post',
+						url:window.protocol+'//api.zmiti.com/v2/h5/add_helpchild',
+						data:{
+							qid:s.qid,
+							dis:s.helpDis,
+							worksclassid:2,
+							openid:'',
+							nickname:'',
+							level:s.level,
+							mobile:s.mobile
+
+						}
+					}).done((data)=>{
+							console.log(data)
+						if(data.getret === 0){
+							this.showToast();
+						}
+					})
+				},2000)
+			},
+			getHelpList(){
+				var s = this;
+				$.ajax({
+					type:'post',
+					url:window.protocol+'//api.zmiti.com/v2/h5/select_helpchild',
+					data:{
+						qid:s.qid
+					},
+
+
+				}).done(data=>{
+					if(data.getret === 0){
+						console.log(data);
+						this.helpList.length = 0;
+						this.count = data.totalnum*1;
+						this.km = data.totaldis*1;
+						data.list.forEach((list,i)=>{
+
+							this.helpList.push({
+								headimg:list.headimgurl||imgs.logo,
+								nickname:list.nickname||'新华社网友',
+								level:list.level
+							})
+						})
+					}
+				})
+			}
 		},
 		mounted(){
+			setTimeout(()=>{
+				this.getHelpList();
+				this.scroll = new IScroll(this.$refs['share'],{scrollbars:true});
+			},10);
 
+
+					
+				setTimeout(()=>{
+					this.scroll.refresh();
+				},1000)
+			if(this.qid && this.mobile && this.address1 && this.address2){
+
+			}
 		}
 	}
 </script>

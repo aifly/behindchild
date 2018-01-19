@@ -29,7 +29,7 @@
 	import imgs from './assets.js'
 	export default {
 		name:'zmiti-result',
-		props:['show','address1','address2'],
+		props:['show','address1','address2','mobile'],
 		data(){
 			return {
 				imgs
