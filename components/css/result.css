@@ -1,0 +1,71 @@
+/*.ant-btn:focus, .ant-btn:hover,.ant-input:focus, .ant-input:hover {
+    background-color: #fff;
+    border-color: #bf1616;
+    box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
+}*/
+.lt-full {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.zmiti-text-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis; }
+
+.zmiti-fill-height {
+  height: 5rem; }
+
+.zmiti-help-text {
+  width: 100%;
+  text-align: center;
+  font-size: .5rem;
+  position: relative; }
+  .zmiti-help-text:before {
+    content: '';
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #df0024;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+    top: 8vh; }
+
+.zmiti-invite {
+  width: 5rem;
+  margin: 6vh auto 5vh; }
+
+.zmiti-help-money {
+  width: 6rem;
+  margin: 0 auto;
+  text-align: center; }
+  .zmiti-help-money h2 {
+    color: #df0024;
+    font-weight: normal; }
+
+.zmiti-share-text {
+  width: 9rem;
+  margin: .4rem auto;
+  text-indent: 2em;
+  color: #303030; }
+
+.zmiti-logo {
+  width: 5rem;
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  bottom: 3vh;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0); }
+  .zmiti-logo img {
+    width: 1rem;
+    display: block;
+    margin: 0 auto; }
+
+/*# sourceMappingURL=result.css.map */

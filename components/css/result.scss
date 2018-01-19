@@ -1,0 +1,65 @@
+@import "./base.scss";
+
+.zmiti-fill-height {
+	height: 5rem;
+}
+
+.zmiti-help-text {
+	width: 100%;
+	text-align: center;
+	font-size: .5rem;
+	@include pos(r);
+
+	&:before {
+		content: '';
+		@include pos(a);
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-top: 12px solid #df0024;
+		left: 50%;
+		@include transform(translate3d(-50%, 0, 0));
+		top: 8vh;
+	}
+
+}
+
+.zmiti-invite {
+	width: 5rem;
+	margin: 6vh auto 5vh;
+}
+
+.zmiti-help-money {
+	width: 6rem;
+	margin: 0 auto;
+	text-align: center;
+
+	h2 {
+		color: #df0024;
+		font-weight: normal;
+	}
+
+}
+
+.zmiti-share-text {
+	width: 9rem;
+	margin: .4rem auto;
+	text-indent: 2em;
+	color: #303030;
+}
+
+.zmiti-logo {
+	width: 5rem;
+	text-align: center;
+	font-size: 12px;
+	@include pos(a);
+	bottom: 3vh;
+	left: 50%;
+	@include transform(translate3d(-50%, 0, 0));
+
+	img {
+		width: 1rem;
+		display: block;
+		margin: 0 auto;
+	}
+
+}
