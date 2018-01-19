@@ -134,6 +134,7 @@
 	import IScroll from 'iscroll';
 	import $ from 'jquery';
 	import Toast from './toast.vue';
+	import zmitiUtil from './methods.js'
 	export default {
 		props:['show','obserable'],
 		name:'zmiti-form',
@@ -243,7 +244,12 @@
 						setTimeout(()=>{
 							$('.iScrollLoneScrollbar').hide();
 							s.$emit('entry',s.ajaxData.address1,s.ajaxData.address2,s.ajaxData.mobile);
-
+							var url = window.location.href.split('#')[0];
+							url = zmitiUtil.changeURLPar(url,'mobile',s.ajaxData.mobile);
+							url = zmitiUtil.changeURLPar(url,'address1',s.ajaxData.address1);
+							url = zmitiUtil.changeURLPar(url,'qid',data.qid);
+							url = zmitiUtil.changeURLPar(url,'address2',s.ajaxData.address2);
+							zmitiUtil.wxConfig('','',url)
 						},2000)				
 
 					}
@@ -288,7 +294,7 @@
 			var {obserable} = this;
 			obserable.on('entryForm',()=>{
 				setTimeout(()=>{
-					
+
 					var scroll = new IScroll(this.$refs['zmiti-form'],{scrollbars:true});
 					this.scroll = scroll;
 					
