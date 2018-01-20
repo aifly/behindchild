@@ -45,8 +45,8 @@
 				显示前10位助攻者
 			</div>
 
-			<div class="zmiti-restart">
-				<a href='./'><img :src='imgs.restart'></a>
+			<div class="zmiti-restart" @touchend='restart'>
+				<img :src='imgs.restart'/>
 			</div>
 
 			<div class="zmiti-logo1">
@@ -103,6 +103,9 @@
 			Toast
 		},
 		methods:{
+			restart(){
+				window.location.href = window.location.href.split('?')[0];
+			},
 			showToast(msg='助力成功！！！',time=2000){
 		    	this.showToastMsg = msg;
 				setTimeout(()=>{

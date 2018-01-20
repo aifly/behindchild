@@ -111,5 +111,9 @@
 .zmiti-share-main-ui .zmiti-restart {
   width: 4rem;
   margin: .4rem auto; }
+  .zmiti-share-main-ui .zmiti-restart a {
+    display: block;
+    width: 100%;
+    height: 100%; }
 
 /*# sourceMappingURL=share.css.map */

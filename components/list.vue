@@ -53,6 +53,7 @@
 			},
 			closeList(){
 				this.show = false;
+				this.list = [];
 			},
 			load(){
 				this.loadText = '加载中...'
@@ -77,8 +78,8 @@
 							this.loaded = true;//没有更多数据了
 							this.loadText = '没有数据了'
 						}
-						!this.scroll &&	(this.scroll = new IScroll(this.$refs['list']))
-						
+						(this.scroll = new IScroll(this.$refs['list']))
+
 						setTimeout(()=>{
 							this.scroll.refresh()
 						},1000)

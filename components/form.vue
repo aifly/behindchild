@@ -105,11 +105,12 @@
 					</div>
 
 					<div class="zmiti-form-item2">
-							<div >
-								<div><label></label>说明</div>
-								<textarea placeholder="说明" v-model='ajaxData.content'></textarea>
-							</div>
+						<div >
+							<div><label></label>说明</div>
+							<textarea placeholder="来说说你的故事和愿景吧" v-model='ajaxData.content'></textarea>
 						</div>
+					</div>
+					<div class="zmiti-tip">您填写的信息我们为您保密！</div>
 
 					<div class="zmiti-submit-info" @touchend='submitInfo'><img :src='imgs.submitInfo' /></div>
 

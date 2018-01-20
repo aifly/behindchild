@@ -161,6 +161,10 @@
       outline: none;
       padding: .2rem;
       box-sizing: border-box; }
+  .zmiti-form .zmiti-tip {
+    color: #f00;
+    margin-top: -.6rem;
+    font-size: 12px; }
   .zmiti-form .zmiti-submit-info {
     width: 4rem;
     margin: 20px auto; }

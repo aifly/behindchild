@@ -13,7 +13,7 @@
                     <input type="text" placeholder="备注" v-model='ajaxData.content' >
                     <div @click='submitInfo'>提交</div> -->
           
-          <img :src='imgs.logo' class="zmiti-logo-index" />
+          <img :src='imgs.logo1' class="zmiti-logo-index" />
           <img :src='imgs.text' class="zmiti-text" />
           <img :src='imgs.zhengji' class="zmiti-zhengji" />
           <img :src='imgs.t1' class="zmiti-t1" />
