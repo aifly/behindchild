@@ -206,6 +206,18 @@
 				background: transparent;
 			}
 
+			textarea {
+				width: 100%;
+				border: 1px dashed #ccc;
+				resize: none;
+				height: 2rem;
+				margin-top: .2rem;
+				background: transparent;
+				outline: none;
+				padding: .2rem;
+				box-sizing: border-box;
+			}
+
 		}
 
 	}

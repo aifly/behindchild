@@ -1,5 +1,5 @@
 <template>
-  	  <section v-if='show' class="zmiti-main-ui lt-full" style="background: url(../assets/images/bg.jpg) no-repeat center bottom;background-size: cover">
+  	  <section v-if='show' class="zmiti-main-ui lt-full" :style="{background:'url('+imgs.bg+') no-repeat center bottom',backgroundSize: 'cover'}">
   	  		<!-- <input type="text" class="zmiti-username" v-model='ajaxData.username' placeholder="请输入姓名" />
                     <input type="text" class="zmiti-userage" placeholder="请输入年龄" v-model='ajaxData.userage' />
                     <input type="text" class="zmiti-nation" placeholder="输入民族" v-model='ajaxData.nation' />
@@ -12,7 +12,8 @@
                     <input type="text" placeholder="就读学校" v-model='ajaxData.schoolname'/>
                     <input type="text" placeholder="备注" v-model='ajaxData.content' >
                     <div @click='submitInfo'>提交</div> -->
-
+          
+          <img :src='imgs.logo' class="zmiti-logo-index" />
           <img :src='imgs.text' class="zmiti-text" />
           <img :src='imgs.zhengji' class="zmiti-zhengji" />
           <img :src='imgs.t1' class="zmiti-t1" />
@@ -20,7 +21,7 @@
           <img :src='imgs.t3' class="zmiti-t3" />
           <img :src='imgs.t4' class="zmiti-t4" />
           <img @click='entryForm' :src='imgs.entry' class="zmiti-entry" />
-          
+          <div @click='lookMore' class="zmiti-look">查看更多梦想</div>
   	  </section>
 </template>
 
@@ -47,8 +48,14 @@ export default {
       this.obserable.trigger({
         type:'entryForm'
       })
-    }
-    ,
+    },
+    lookMore(){
+      var {obserable} = this;
+      obserable.trigger({
+        type:'toggleList',
+        data:true
+      })
+    },
     clickHymn(){//点赞
 
       var qid = this.getQueryString('qid'),
@@ -65,6 +72,9 @@ export default {
     }
   },
   mounted(){
+
+
+    //this.$dest();
 
   },
   components: {

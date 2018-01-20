@@ -1,6 +1,6 @@
 <template>
-	<div ref='share' v-if='show' class="lt-full zmiti-share-main-ui" :style='{height:viewH+"px",overflow:"hidden"}' >
-		<div :style="{background: 'url('+imgs.share+') no-repeat center top',backgroundSize:'cover'}">
+	<div ref='share' v-if='show' class="lt-full zmiti-share-main-ui" :style='{height:viewH+"px",overflow:"hidden",position:"fixed"}' >
+		<div :style="{minHeight:viewH+'px',background: 'url('+imgs.share+') no-repeat center top',backgroundSize:'cover'}">
 			<Toast :msg='showToastMsg'></Toast>
 			<h1 class="zmiti-fill-height">
 				<div class="zmiti-dis">-{{km}}km</div>
@@ -22,7 +22,7 @@
 				<img :src='imgs.seal'/>
 				<div>{{helpDis}}</div>
 			</div>
-			<div class="zmiti-help-btn" @click='helpChild'>
+			<div class="zmiti-help-btn" @touchend='helpChild'>
 				<img :src='imgs.help' alt="">
 			</div>
 
@@ -43,6 +43,10 @@
 			</ul>
 			<div class="zmiti-help-title" style="font-size: 12px;">
 				显示前10位助攻者
+			</div>
+
+			<div class="zmiti-restart">
+				<a href='./'><img :src='imgs.restart'></a>
 			</div>
 
 			<div class="zmiti-logo1">
@@ -91,37 +95,7 @@
 				beginHelp:false,
 				scaleKm:2135,
 				helpList:[
-					{
-						headimg:imgs.logo,
-						nickname:'fly',
-						
-						level:0
-					},
-					{
-						headimg:imgs.logo,
-						nickname:'fly',
-						level:1
-					},{
-						headimg:imgs.logo,
-						nickname:'fly',
-						level:3
-					},{
-						headimg:imgs.logo,
-						nickname:'fly',
-						level:3
-					},{
-						headimg:imgs.logo,
-						nickname:'fly',
-						level:2
-					},{
-						headimg:imgs.logo,
-						nickname:'fly',
-						level:1
-					},{
-						headimg:imgs.logo,
-						nickname:'fly',
-						level:2
-					}
+					
 				]
 			}
 		},
@@ -137,6 +111,10 @@
 		    },
 			helpChild(){
 
+				if(this.beginHelp){
+					this.showToast('您已经为TA助攻过啦');
+					return;
+				}
 				this.beginHelp = true;
 
 				this.timer = setInterval(()=>{
@@ -157,8 +135,9 @@
 							qid:s.qid,
 							dis:s.helpDis,
 							worksclassid:2,
-							openid:'',
-							nickname:'',
+							openid:window.openid,
+							headimgurl:window.headimgurl,
+							nickname:window.nickname,
 							level:s.level,
 							mobile:s.mobile
 
@@ -167,6 +146,18 @@
 							console.log(data)
 						if(data.getret === 0){
 							this.showToast();
+
+							this.helpList.push({
+								headimg:window.headimgurl||imgs.logo,
+								nickname:window.nickname||'新华社网友',
+								level:s.level
+							});
+
+							setTimeout(()=>{
+								s.scroll.refresh();
+							},100)
+
+
 						}
 					})
 				},2000)
@@ -187,13 +178,16 @@
 						this.helpList.length = 0;
 						this.count = data.totalnum*1;
 						this.km = data.totaldis*1;
+						
 						data.list.forEach((list,i)=>{
 
 							this.helpList.push({
 								headimg:list.headimgurl||imgs.logo,
 								nickname:list.nickname||'新华社网友',
 								level:list.level
-							})
+							});
+
+
 						})
 					}
 				})
@@ -201,18 +195,17 @@
 		},
 		mounted(){
 			setTimeout(()=>{
-				this.getHelpList();
-				this.scroll = new IScroll(this.$refs['share'],{scrollbars:true});
-			},10);
 
+				if(this.qid && this.mobile && this.address1 && this.address2){
 
-					
-				setTimeout(()=>{
-					this.scroll.refresh();
-				},1000)
-			if(this.qid && this.mobile && this.address1 && this.address2){
-
-			}
+					this.getHelpList();
+					this.scroll = new IScroll(this.$refs['share'],{scrollbars:true});
+							
+					setTimeout(()=>{
+						this.scroll.refresh();
+					},1000)
+				}
+			},10)
 		}
 	}
 </script>

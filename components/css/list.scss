@@ -1,0 +1,71 @@
+@import "./base.scss";
+
+.zmiti-back {
+	@include pos(f);
+	z-index: 10;
+	width: 1.6rem;
+	@include br();
+	right: .5rem;
+	bottom: .5rem;
+}
+
+.zmiti-list-main-ui {
+	background: #fff;
+	overflow: hidden;
+
+	&:before {
+		content: '';
+		@include pos(f);
+		width: 1rem;
+		height: 100%;
+		z-index: 10;
+		background: rgba(238, 238, 238, .5);
+	}
+
+	&>div {
+		padding-bottom: 1rem;
+	}
+
+	.zmiti-load-more {
+		text-align: center;
+		height: 1rem;
+	}
+
+	ul {
+		width: 7rem;
+		margin: 0 auto;
+		@include pos(r);
+		left: .5rem;
+
+		li {
+			img {
+				width: 1rem;
+			}
+
+			h3 {
+				color: #474747;
+			}
+
+			&:last-of-type {
+				background: none !important;
+			}
+
+			padding-bottom: .5rem;
+			margin: 10px 0;
+
+			.zmiti-address {
+				margin: 5px 0;
+				color: #4e4e4e;
+			}
+
+			.zmiti-remark {
+				border: 1px dashed #ccc;
+				text-indent: 2em;
+				padding: 10px;
+			}
+
+		}
+
+	}
+
+}

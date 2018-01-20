@@ -29,11 +29,11 @@
 	.zmiti-seal {
 		width: 5rem;
 		height: 2rem;
-		border:1px solid transparent;
+		border: 1px solid transparent;
 		margin: 0 auto;
-
 		@include pos(r);
-		top:.4rem;
+		top: .4rem;
+
 		div {
 			@include pos(a);
 			top: .4rem;
@@ -132,6 +132,11 @@
 		width: 4rem;
 		margin: 1rem auto 0;
 		padding-bottom: 1rem;
+	}
+
+	.zmiti-restart {
+		width: 4rem;
+		margin: .4rem auto;
 	}
 
 }

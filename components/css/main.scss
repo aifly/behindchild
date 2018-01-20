@@ -75,5 +75,45 @@ img {
 	width: 5rem;
 	@include pos(a);
 	left: 2.5rem;
-	bottom: 1rem;
+	bottom: 1.5rem;
+}
+
+.zmiti-look {
+	text-decoration: underline;
+	color: #7c6132;
+	text-align: center;
+	@include pos(a);
+	bottom: .6rem;
+	left: 0;
+	width: 100%;
+	font-size: 12px;
+}
+
+.zmiti-logo-index {
+	@include pos(a);
+	width: 1rem;
+	left: .4rem;
+	top: .4rem;
+}
+
+.zmiti-play {
+	width: .8rem;
+	height: .8rem;
+	@include br();
+	@include pos(f);
+	z-index: 1000;
+	right: .5rem;
+	top: .5rem;
+
+	&.rotate {
+		@include animation(rotate 5s linear infinite);
+	}
+
+}
+
+@-webkit-keyframes rotate {
+	to {
+		@include transform(rotate(360deg));
+	}
+
 }

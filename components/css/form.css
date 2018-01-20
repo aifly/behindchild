@@ -151,6 +151,16 @@
       border: none;
       height: .7rem;
       background: transparent; }
+    .zmiti-form .zmiti-form-C .zmiti-form-item2 textarea {
+      width: 100%;
+      border: 1px dashed #ccc;
+      resize: none;
+      height: 2rem;
+      margin-top: .2rem;
+      background: transparent;
+      outline: none;
+      padding: .2rem;
+      box-sizing: border-box; }
   .zmiti-form .zmiti-submit-info {
     width: 4rem;
     margin: 20px auto; }

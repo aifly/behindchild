@@ -1,4 +1,12 @@
+import $ from 'jquery'
 var zmitiUtil = {
+	wxInfo() {
+		return {
+			wxappid: window.wxappid,
+			wxappsecret: wxappsecret,
+			customid: window.customid
+		}
+	},
 	getQueryString: function(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 		var r = window.location.search.substr(1).match(reg);
@@ -18,17 +26,21 @@ var zmitiUtil = {
 			return false;
 		}
 	},
-	wxConfig: function(title, desc,  url) {
+	wxConfig: function(title, desc, url) {
 		var s = this;
-		var img = window.protocol+'//h5.zmiti.com/public/couplet/300.jpg';
-		var appId = 'wxfacf4a639d9e3bcc'; //'wxfacf4a639d9e3bcc'; // data.wxappid; // 'wxfacf4a639d9e3bcc'; //data.wxappid;
+		var img = window.baseUrl + '/assets/images/300.jpg';
+		//var appId = 'wxfacf4a639d9e3bcc'; //'wxfacf4a639d9e3bcc'; // data.wxappid; // 'wxfacf4a639d9e3bcc'; //data.wxappid;
+
+		var appId = this.wxInfo().wxappid;
 
 		var durl = url || location.href.split('#')[0];
+
 		var code_durl = encodeURIComponent(durl);
 
 		$.ajax({
 			type: 'get',
-			url: window.protocol+"//api.zmiti.com/weixin/jssdk.php?type=signature&durl=" + code_durl,
+			//url: "http://api.zmiti.com/weixin/jssdk.php?type=signature&durl=" + code_durl + '&worksid=' + window.customid,
+			url: window.baseUrl + "/weixin/jssdk.php?type=signature&durl=" + code_durl + '&worksid=' + window.customid,
 			dataType: 'jsonp',
 			jsonp: "callback",
 			jsonpCallback: "jsonFlickrFeed",
@@ -36,6 +48,7 @@ var zmitiUtil = {
 
 			},
 			success: function(data) {
+
 				wx.config({
 					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 					appId: appId, // 必填，公众号的唯一标识
@@ -43,15 +56,15 @@ var zmitiUtil = {
 					nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
 					signature: data.signature, // 必填，签名，见附录1
 					jsApiList: ['checkJsApi',
-							'onMenuShareTimeline',
-							'onMenuShareAppMessage',
-							'onMenuShareQQ',
-							'onMenuShareWeibo',
-							'hideMenuItems',
-							'showMenuItems',
-							'hideAllNonBaseMenuItem',
-							'showAllNonBaseMenuItem'
-						] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+						'onMenuShareTimeline',
+						'onMenuShareAppMessage',
+						'onMenuShareQQ',
+						'onMenuShareWeibo',
+						'hideMenuItems',
+						'showMenuItems',
+						'hideAllNonBaseMenuItem',
+						'showAllNonBaseMenuItem'
+					] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 				});
 
 				wx.ready(function() {
@@ -90,21 +103,25 @@ var zmitiUtil = {
 			}
 		});
 
+
+
 	},
 
 	getOauthurl: function() {
 		var s = this;
-		var data = {
-			wxappid: 'wxfacf4a639d9e3bcc',
-			wxappsecret: "149cdef95c99ff7cab523d8beca86080"
-		}
+		var {
+			wxappid,
+			wxappsecret,
+			customid
+		} = this.wxInfo();
 		$.ajax({
 			type: 'post',
-			url: window.protocol+'//api.zmiti.com/v2/weixin/getwxuserinfo/',
+			//url: window.baseUrl + '/weixin/getwxuserinfo/',
+			url: window.protocol + '//api.zmiti.com/v2/weixin/getwxuserinfo/',
 			data: {
 				code: s.getQueryString('code'),
-				wxappid: data.wxappid,
-				wxappsecret: data.wxappsecret
+				wxappid,
+				wxappsecret
 			},
 			error: function() {},
 			success: function(dt) {
@@ -118,49 +135,56 @@ var zmitiUtil = {
 
 					window.nickname = s.nickname;
 					window.headimgurl = s.headimgurl;
+					window.openid = s.openid;
 
-					var opt = {
-						nickname: s.nickname,
-						headimgurl: s.headimgurl
-					}
+					var URI = window.location.href.split('#')[0];
 
-					s.wxConfig('收到'+s.nickname+'为你写的"福"字','快打开看看吧');
-					
-
+					s.wxConfig('为你圆梦', '@留守儿童 新华社喊你来许愿！有机会得团圆基金哦');
 
 				} else {
 					if (s.isWeiXin()) {
-						var nickname = s.getQueryString('nickname');
-						var src = s.getQueryString('src');
+						var mobile = s.getQueryString('mobile');
+						var address1 = s.getQueryString('address1');
+						var address2 = s.getQueryString('address2');
+						var qid = s.getQueryString('qid');
 
 						var redirect_uri = window.location.href.split('?')[0];
 
-						if (nickname) {
-							redirect_uri = s.changeURLPar(redirect_uri, 'nickname', (nickname));
+						if (mobile) {
+							redirect_uri = s.changeURLPar(redirect_uri, 'mobile', (mobile));
 						}
-						if(src){
-							redirect_uri = s.changeURLPar(redirect_uri, 'src', (src));	
+						if (address1) {
+							redirect_uri = s.changeURLPar(redirect_uri, 'address1', (address1));
+						}
+						if (address2) {
+							redirect_uri = s.changeURLPar(redirect_uri, 'address2', (address2));
+						}
+
+						if (qid) {
+							redirect_uri = s.changeURLPar(redirect_uri, 'qid', (qid));
 						}
 
 						$.ajax({
-							url: window.protocol+'//api.zmiti.com/v2/weixin/getoauthurl/',
+							//url: window.baseUrl + '/weixin/getoauthurl/',
+							url: window.protocol + '//api.zmiti.com/v2/weixin/getoauthurl/',
 							type: 'post',
 							data: {
 								redirect_uri: redirect_uri,
 								scope: 'snsapi_userinfo',
-								worksid: 31,
+								worksid: customid,
 								state: new Date().getTime() + ''
 							},
 							error: function() {},
 							success: function(dt) {
 								if (dt.getret === 0) {
-
 									window.location.href = dt.url;
 
 								}
 							}
 						})
-					} else {}
+					} else {
+						s.wxConfig('为你圆梦', '@留守儿童 新华社喊你来许愿！有机会得团圆基金哦')
+					}
 
 				}
 

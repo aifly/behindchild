@@ -105,13 +105,13 @@
 					</div>
 
 					<div class="zmiti-form-item2">
-							<div :style='lineStyle'>
-								<span><label></label>备注</span>
-								<input type="text" name="" v-model='ajaxData.content'/>
+							<div >
+								<div><label></label>说明</div>
+								<textarea placeholder="说明" v-model='ajaxData.content'></textarea>
 							</div>
 						</div>
 
-					<div class="zmiti-submit-info" @click='submitInfo'><img :src='imgs.submitInfo' /></div>
+					<div class="zmiti-submit-info" @touchend='submitInfo'><img :src='imgs.submitInfo' /></div>
 
 					<div class="zmiti-condition">
 						<h2>条件</h2>
@@ -147,7 +147,7 @@
 				showToastMsg:'',
 				viewH:document.documentElement.clientHeight,
 				lineStyle:{
-					 background:'url(../assets/images/line.png) no-repeat center bottom'
+					 background:'url('+imgs.line+') no-repeat center bottom'
 				},
 				province1:[],
 				province2:[],
@@ -161,20 +161,20 @@
 				pros2:'',
 				city2:'',
 				ajaxData:{
-					username:'小A',
+					username:'',
 					hymn:0,
 					classid:0,
 					sort:1,
 					sex:-1,
 					userage:'',
-					nation:'汉',
+					nation:'',
 					address1:'',
 					address2:'',
-					gname:'fly',
-					mobile:'15718827182',
+					gname:'',
+					mobile:'',
 					content:"",
 					worksclassid:2,//征集留守儿童的h5
-					schoolname:'北京XX小学',
+					schoolname:'',
 				}
 			}	
 		},
@@ -187,6 +187,7 @@
 
 						this.city1 = this.citys1[0].label; 
 						this.address1 = this.city1;
+						this.ajaxData.address1 = this.address1;
 						//this.city1 = p.label;
 						return 0;
 					}
@@ -199,6 +200,7 @@
 						this.citys2 = p.children;
 						this.city2 = this.citys2[0].label; 
 						this.address2 = this.city2;
+						this.ajaxData.address2 = this.address2;
 						//this.city1 = p.label;
 						return 0;
 					}
@@ -208,16 +210,28 @@
 			getAddress1(e){
 				this.city1 = e.target.value;
 				this.address1 = this.city1;
+				this.ajaxData.address1 = this.address1;
+
 			},
 			getAddress2(e){
 				this.city2 = e.target.value;
 				this.address2 = this.city2;
+				this.ajaxData.address2 = this.address2;
+			},
+
+			changeURLPar: function(url, arg, val) {
+				var pattern = arg + '=([^&]*)';
+				var replaceText = arg + '=' + val;
+				return url.match(pattern) ? url.replace(eval('/(' + arg + '=)([^&]*)/gi'), replaceText) : (url.match('[\?]') ? url + '&' + replaceText : url + '?' + replaceText);
 			},
 			submitInfo(){
 				var s = this;
+
+
 				
-				if(!s.ajaxData.content){
-					s.ajaxData.content  = '无'
+				if(!s.ajaxData.username){
+					this.showToast('请填写姓名');
+					return;
 				}
 				
 				if(!s.ajaxData.userage){
@@ -228,31 +242,62 @@
 					this.showToast('请填写民族');
 					return;
 				}
+				if(!s.ajaxData.schoolname){
+					this.showToast('请填写就读学校');
+					return;
+				}
 				if(s.ajaxData.sex === -1){
 					this.showToast('请填写性别');
 					return;
 				}
-				
+
+				var reg = /^0?1[3|4|5|8|7][0-9]\d{8}$/
+
+				if(!reg.test(s.ajaxData.mobile)){
+					this.showToast('请填写正确的手机号');
+					return;
+				}
+				if(!s.ajaxData.content){
+					s.ajaxData.content  = '无'
+				}
 				$.ajax({
 					url:window.protocol + '//api.zmiti.com/v2/h5/add_question/',
 					type:'post',
-					data:s.ajaxData
-					}).done((data)=>{
-						console.log(data);
-					if(data.getret === 0){
-						s.showToast();
-						setTimeout(()=>{
-							$('.iScrollLoneScrollbar').hide();
-							s.$emit('entry',s.ajaxData.address1,s.ajaxData.address2,s.ajaxData.mobile);
-							var url = window.location.href.split('#')[0];
-							url = zmitiUtil.changeURLPar(url,'mobile',s.ajaxData.mobile);
-							url = zmitiUtil.changeURLPar(url,'address1',s.ajaxData.address1);
-							url = zmitiUtil.changeURLPar(url,'qid',data.qid);
-							url = zmitiUtil.changeURLPar(url,'address2',s.ajaxData.address2);
-							zmitiUtil.wxConfig('','',url)
-						},2000)				
-
+					data:s.ajaxData,
+					error(){
 					}
+					}).done((data)=>{
+						
+						if(data.getret === 0){
+							s.showToast();
+							/*url = zmitiUtil.changeURLPar(url,'address1',encodeURI(s.ajaxData.address1));
+							url = zmitiUtil.changeURLPar(url,'qid',data.qid);
+							url = zmitiUtil.changeURLPar(url,'address2',encodeURI(s.ajaxData.address2));*/
+							
+							setTimeout(()=>{
+								$('.iScrollLoneScrollbar').hide();
+								s.$emit('entry',s.ajaxData.address1,s.ajaxData.address2,s.ajaxData.mobile);
+								
+								s.obserable.trigger({
+									type:'setAddress',
+									data:{
+										address1:s.ajaxData.address1,
+										address2:s.ajaxData.address2,
+										mobile:s.ajaxData.mobile
+									}
+								});
+
+								var URI = window.location.href.split('#')[0];
+								URI = zmitiUtil.changeURLPar(URI,'mobile',encodeURI(s.ajaxData.mobile))
+								URI = zmitiUtil.changeURLPar(URI,'address1',encodeURI(s.ajaxData.address1))
+								URI = zmitiUtil.changeURLPar(URI,'address2',encodeURI(s.ajaxData.address2))
+								URI = zmitiUtil.changeURLPar(URI,'qid',data.qid);
+
+								zmitiUtil.wxConfig('我与父母的距离，就差你的助','1人为我与父母春节团聚缩短了1公里，期待你的助攻',URI)
+								
+							},2000)				
+
+						}
 				})
 		    },
 		    showToast(msg='提交成功！！！',time=2000){
@@ -285,12 +330,13 @@
 					}
 				})
 			}
+
 		},
+		
 		mounted(){
 
 			this.fillCitys()
 			
-
 			var {obserable} = this;
 			obserable.on('entryForm',()=>{
 				setTimeout(()=>{
@@ -303,6 +349,8 @@
 					},1000)
 				},100)
 			});
+			
+						
 
 
 		}
