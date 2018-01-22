@@ -5,7 +5,7 @@ imgs = {
 	t1: './assets/images/t1-4.png',
 	bg: './assets/images/bg.jpg',
 	entry: './assets/images/entry.png',
-	title: './assets/images/title-1.png',
+	title: './assets/images/title-2.png',
 	submitInfo: './assets/images/submit-info-1.png',
 	line: './assets/images/line.png',
 	result: './assets/images/result.jpg',
