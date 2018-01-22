@@ -13,13 +13,10 @@
                     <input type="text" placeholder="备注" v-model='ajaxData.content' >
                     <div @click='submitInfo'>提交</div> -->
           
-          <img :src='imgs.logo1' class="zmiti-logo-index" />
+          <img :src='imgs.logo' class="zmiti-logo-index" />
           <img :src='imgs.text' class="zmiti-text" />
           <img :src='imgs.zhengji' class="zmiti-zhengji" />
           <img :src='imgs.t1' class="zmiti-t1" />
-          <img :src='imgs.t2' class="zmiti-t2" />
-          <img :src='imgs.t3' class="zmiti-t3" />
-          <img :src='imgs.t4' class="zmiti-t4" />
           <img @click='entryForm' :src='imgs.entry' class="zmiti-entry" />
           <div @click='lookMore' class="zmiti-look">查看更多梦想</div>
   	  </section>

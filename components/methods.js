@@ -26,7 +26,7 @@ var zmitiUtil = {
 			return false;
 		}
 	},
-	wxConfig: function(title, desc, url) {
+	wxConfig: function(title, desc, url, isDebug = false) {
 		var s = this;
 		var img = window.baseUrl + '/assets/images/300.jpg';
 		//var appId = 'wxfacf4a639d9e3bcc'; //'wxfacf4a639d9e3bcc'; // data.wxappid; // 'wxfacf4a639d9e3bcc'; //data.wxappid;
@@ -50,7 +50,7 @@ var zmitiUtil = {
 			success: function(data) {
 
 				wx.config({
-					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					debug: isDebug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 					appId: appId, // 必填，公众号的唯一标识
 					timestamp: '1488558145', // 必填，生成签名的时间戳
 					nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串

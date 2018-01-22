@@ -3,7 +3,7 @@
 		<div :style="{minHeight:viewH+'px',background: 'url('+imgs.share+') no-repeat center top',backgroundSize:'cover'}">
 			<Toast :msg='showToastMsg'></Toast>
 			<h1 class="zmiti-fill-height">
-				<div class="zmiti-dis">-{{km}}km</div>
+				<div class="zmiti-dis">-{{km.toFixed(2)}}km</div>
 				<div class="zmiti-address1">{{address1}}出发</div>
 				<div class="zmiti-address2">{{address2}}到达</div>
 			</h1>
@@ -50,7 +50,7 @@
 			</div>
 
 			<div class="zmiti-logo1">
-				<img :src='imgs.logo1'>
+				<img :src='imgs.logo'>
 			</div>
 		</div>
 		
@@ -62,6 +62,7 @@
 	import $ from 'jquery';
 	import Toast from './toast.vue';
 	import IScroll from 'iscroll'
+	import zmitiUtil from './methods.js';
 	export default {
 		name:'zmiti-result',
 		props:['show','mobile','address1','address2','qid'],
@@ -71,19 +72,19 @@
 				viewH:document.documentElement.clientHeight,
 				helpClassify:[
 					{
-						dis:.1,
+						dis:.3,
 						content:'不好意思，意思意思，没别意思！'
 					},{
-						dis:.5,
+						dis:.7,
 						content:'咦，我明明带着车钥匙的，怎么不见了'
 					},{
 						dis:1,
 						content:'哎呀，车链子掉了，下次一定送远一点'
 					},{
-						dis:3,
+						dis:6,
 						content:'抓住了，我的车可有点颠'
 					},{
-						dis:8,
+						dis:12,
 						content:'坐稳了，飞机即将起飞'
 					}
 				],
@@ -125,6 +126,7 @@
 					var index = (Math.random()*this.helpClassify.length)|0;
 					this.helpDis = this.helpClassify[index].dis;
 					this.level = index;
+					this.km += this.helpDis*1;
 
 				},100);
 
@@ -181,6 +183,15 @@
 						this.helpList.length = 0;
 						this.count = data.totalnum*1;
 						this.km = data.totaldis*1;
+						//alert(this.count+'人为我与父母春节团聚缩短了'+this.km+'公里，期待你的助攻');
+
+						setTimeout(()=>{
+							zmitiUtil.wxConfig('我与父母的距离，就差你的助攻',
+							this.count+'人为我与父母春节团聚缩短了'+this.km+'公里，期待你的助攻');
+						},1000)
+
+						//alert(3)
+
 						
 						data.list.forEach((list,i)=>{
 

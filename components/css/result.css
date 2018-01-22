@@ -54,6 +54,17 @@
   text-indent: 2em;
   color: #303030; }
 
+.zmiti-logo-xc {
+  width: 100%;
+  bottom: 1vh;
+  font-size: 12px;
+  text-align: right;
+  margin: 10px auto; }
+  .zmiti-logo-xc img {
+    width: .5rem;
+    vertical-align: top;
+    margin: 0 auto; }
+
 .zmiti-logo {
   width: 5rem;
   text-align: center;

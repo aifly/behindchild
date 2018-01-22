@@ -1,8 +1,8 @@
 <template>
 	<div v-if='show' class=" zmiti-form" :style='{height:viewH+"px"}' ref='zmiti-form'>
-		<div :style="{background:' url('+imgs.formBg+') no-repeat center top',backgroundSize:'cover',padding:'1rem 0'}">
+		<div :style="{background:' url('+imgs.formBg+') no-repeat center top',backgroundSize:'cover',padding:'0 0 1rem 0'}">
+			<img :src='imgs.title' alt="" class="zmiti-title">
 			<div class="zmiti-form-main-ui">
-				<img :src='imgs.title' alt="" class="zmiti-title">
 				<div class="zmiti-form-C">
 					<div class="zmiti-form-item">
 						<div :style='lineStyle'>
@@ -106,7 +106,7 @@
 
 					<div class="zmiti-form-item2">
 						<div >
-							<div><label></label>说明</div>
+							<div><img :src='imgs.sm'/></div>
 							<textarea placeholder="来说说你的故事和愿景吧" v-model='ajaxData.content'></textarea>
 						</div>
 					</div>
@@ -121,6 +121,12 @@
 							<li>2、2018年春节想去城里与父母团圆的</li>
 							<li>3、正就读小学和初中的留守儿童</li>
 						</ul>
+					</div>
+
+
+					<div class="zmiti-logo-xc">
+						支持：携程
+						<img :src='imgs.xc' alt="" />
 					</div>
 				</div>
 			</div>
@@ -294,7 +300,7 @@
 								URI = zmitiUtil.changeURLPar(URI,'address2',encodeURI(s.ajaxData.address2))
 								URI = zmitiUtil.changeURLPar(URI,'qid',data.qid);
 
-								zmitiUtil.wxConfig('我与父母的距离，就差你的助','1人为我与父母春节团聚缩短了1公里，期待你的助攻',URI)
+								zmitiUtil.wxConfig('我与父母的距离，就差你的助攻','1人为我与父母春节团聚缩短了1公里，期待你的助攻',URI)
 								
 							},2000)				
 

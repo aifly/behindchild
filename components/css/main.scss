@@ -34,22 +34,22 @@ img {
 .zmiti-text {
 	width: 1.4rem;
 	@include pos(a);
-	right: 1rem;
+	right: 2.8rem;
 	top: .5rem;
 }
 
 .zmiti-zhengji {
 	@include pos(a);
-	width: .8rem;
-	right: 2.5rem;
+	width: 1.3rem;
+	right: 1.5rem;
 	top: .5rem;
 }
 
 .zmiti-t1, .zmiti-t2 {
-	width: .8rem;
+	width: 1.4rem;
 	@include pos(a);
-	right: 2.5rem;
-	top: 2.2rem;
+	left: 2.5rem;
+	top: 1.5rem;
 }
 
 .zmiti-t2 {
@@ -91,7 +91,7 @@ img {
 
 .zmiti-logo-index {
 	@include pos(a);
-	width: 2rem;
+	width: 1rem;
 	left: .4rem;
 	top: .4rem;
 }

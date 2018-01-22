@@ -26,7 +26,7 @@ new Vue({
 			address2: '',
 			qid: '',
 			play: './assets/images/play.png',
-			music: './assets/music/bg.mp3',
+			music: './assets/music/bg-1.mp3',
 			obserable
 		}
 	},
@@ -88,6 +88,8 @@ new Vue({
 		this.showShare = isShare;
 
 		zmitiUtil.wxConfig('为你圆梦', '@留守儿童 新华社喊你来许愿！有机会得团圆基金哦')
+
+
 
 		if (this.showShare) {
 			zmitiUtil.getOauthurl();

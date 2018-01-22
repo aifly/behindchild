@@ -34,7 +34,7 @@
     padding-top: .6rem;
     position: relative; }
   .zmiti-form .zmiti-title {
-    width: 9rem; }
+    width: 10rem; }
   .zmiti-form .zmiti-form-C span {
     position: relative; }
   .zmiti-form .zmiti-form-C label {
@@ -143,6 +143,8 @@
       color: #f00; }
     .zmiti-form .zmiti-form-C .zmiti-form-item2 > div {
       padding: 0 0 4px 0; }
+    .zmiti-form .zmiti-form-C .zmiti-form-item2 img {
+      width: 1.3rem; }
     .zmiti-form .zmiti-form-C .zmiti-form-item2 ul {
       display: none; }
     .zmiti-form .zmiti-form-C .zmiti-form-item2 input {

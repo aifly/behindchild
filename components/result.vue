@@ -10,18 +10,20 @@
 		<div class="zmiti-invite" @touchstart='showMask=true'><img :src="imgs.invite" alt=""></div>
 
 		<div class="zmiti-help-money">
-			<h2>团圆基金,助你圆梦</h2>
-			<span>(新华社新媒体中心提供）</span>
+			<h2>团圆基金助你圆梦</h2>
+			<span hidden="hidden">(新华社新媒体中心提供）</span>
 		</div>
 
 		<div class="zmiti-share-text">
-			将此页面分享给好友，邀请好友为你积累里程，缩短你与父母间的距离，有机会获得新华社新媒体中心为你提供的团圆基金。
+			将此页面分享给好友，邀请好友为你积累里程，缩短你与父母间的距离，有机会获得我们为你提供的团圆基金。
 		</div>
 
 		<div class="zmiti-logo">
 			<img :src='imgs.logo' alt="" />
 			新华社新媒体中心
 		</div>
+
+
 
 		<div v-if='showMask' @touchstart='showMask=false' class="zmiti-mask">
 			<img :src='imgs.arrow'/>
