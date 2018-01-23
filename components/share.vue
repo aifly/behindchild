@@ -1,8 +1,9 @@
 <template>
-	<div ref='share' v-if='show' class="lt-full zmiti-share-main-ui" :style='{height:viewH+"px",overflow:"hidden",position:"fixed"}' >
-		<div :style="{minHeight:viewH+'px',background: 'url('+imgs.share+') no-repeat center top',backgroundSize:'cover'}">
+	<div ref='share' v-if='show' class="lt-full zmiti-share-main-ui" :style='{height:viewH+"px",overflow:"hidden",position:"fixed",background: "url("+imgs.share1+") no-repeat center top",backgroundSize:"cover"}' >
+		<div :style="{minHeight:viewH+'px'}">
+			<img :src="imgs.share" alt="">
 			<Toast :msg='showToastMsg'></Toast>
-			<h1 class="zmiti-fill-height">
+			<h1 class="zmiti-fill-height1">
 				<div class="zmiti-dis">-{{km.toFixed(2)}}km</div>
 				<div class="zmiti-address1">{{address1}}出发</div>
 				<div class="zmiti-address2">{{address2}}到达</div>
@@ -42,12 +43,14 @@
 				</li>
 			</ul>
 			<div class="zmiti-help-title" style="font-size: 12px;">
-				显示前10位助攻者
+				显示前100位助攻者
 			</div>
 
 			<div class="zmiti-restart" @touchend='restart'>
 				<img :src='imgs.restart'/>
 			</div>
+
+			
 
 			<div class="zmiti-logo1">
 				<img :src='imgs.logo'>
@@ -91,10 +94,10 @@
 				imgs,
 				helpDis:2,
 				
-				count:5000,
-				km:-211,
+				count:0,
+				km:0,
 				beginHelp:false,
-				scaleKm:2135,
+				scaleKm:0,
 				helpList:[
 					
 				]
@@ -152,7 +155,7 @@
 						if(data.getret === 0){
 							this.showToast();
 
-							this.helpList.push({
+							this.helpList.unshift({
 								headimg:window.headimgurl||imgs.logo,
 								nickname:window.nickname||'新华社网友',
 								level:s.level

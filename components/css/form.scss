@@ -127,20 +127,26 @@
 
 			select {
 				@include pos(a);
-				left: 0;
 				top: 0;
 				width: 2.3rem;
+				opacity: 1;
+				right: 0;
 				opacity: 0;
 			}
 
 			.zmiti-pro {
 				@include pos(a);
-				left: 0;
 				font-size: 12px;
 				top: 0;
 				text-align: center;
 				left: 50%;
 				@include transform(translateX(-100%));
+			}
+
+			.zmiti-pro1 {
+				left: 65%;
+				width: 50%;
+				text-align: right;
 			}
 
 			div {
@@ -173,10 +179,18 @@
 						top: .2rem;
 					}
 
+					&:nth-of-type(2) {
+						&:before {
+							right: .5rem;
+						}
+
+					}
+
 				}
 
-				span {
-					margin-right: 10px;
+				span.zmiti-city-t {
+					@include pos(r);
+					left: 1.2rem;
 				}
 
 			}

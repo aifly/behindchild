@@ -66,10 +66,21 @@ new Vue({
 		toggleMusic() {
 			var music = this.$refs['audio'];
 			music[music.paused ? 'play' : 'pause']()
+		},
+		updatePv() {
+			$.ajax({
+				url: window.protocol + '//api.zmiti.com/v2/custom/update_pvnum/',
+				type: 'post',
+				data: {
+					isrand: 1,
+					customid: 34
+				}
+			});
 		}
 
 	},
 	created() {
+		this.updatePv();
 		//zmitiUtil.getOauthurl();
 	},
 	mounted() {
@@ -87,7 +98,9 @@ new Vue({
 		this.showMain = !isShare;
 		this.showShare = isShare;
 
-		zmitiUtil.wxConfig('为你圆梦', '@留守儿童 新华社喊你来许愿！有机会得团圆基金哦')
+		if (!isShare) {
+			zmitiUtil.wxConfig('为你圆梦', '@留守儿童 新华社喊你来许愿！有机会得团圆基金哦')
+		}
 
 
 

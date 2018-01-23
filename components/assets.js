@@ -9,6 +9,7 @@ imgs = {
 	submitInfo: './assets/images/submit-info-1.png',
 	line: './assets/images/line.png',
 	result: './assets/images/result.jpg',
+	result1: './assets/images/result1.jpg',
 	share: './assets/images/share.jpg',
 	formBg: './assets/images/form-bg.png',
 	invite: './assets/images/invite.png',
@@ -23,5 +24,7 @@ imgs = {
 	sm: './assets/images/sm.png',
 	restart: './assets/images/restart.png',
 	listtop: './assets/images/listtop.jpg',
+	share: './assets/images/share3.jpg',
+	share1: './assets/images/share1.jpg',
 }
 export default imgs;

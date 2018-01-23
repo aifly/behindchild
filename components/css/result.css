@@ -24,7 +24,8 @@
   width: 100%;
   text-align: center;
   font-size: .5rem;
-  position: relative; }
+  position: relative;
+  margin-top: 1rem; }
   .zmiti-help-text:before {
     content: '';
     position: absolute;
@@ -50,6 +51,7 @@
 
 .zmiti-share-text {
   width: 9rem;
+  line-height: .8rem;
   margin: .4rem auto;
   text-indent: 2em;
   color: #303030; }
@@ -69,14 +71,18 @@
   width: 5rem;
   text-align: center;
   font-size: 12px;
-  position: absolute;
-  bottom: 3vh;
-  left: 50%;
-  -webkit-transform: translate3d(-50%, 0, 0);
-  transform: translate3d(-50%, 0, 0); }
+  margin: 1rem auto; }
   .zmiti-logo img {
     width: 1rem;
     display: block;
     margin: 0 auto; }
+
+.zmiti-team {
+  width: 9rem;
+  margin: 1rem auto 0; }
+  .zmiti-team > div {
+    line-height: .8rem; }
+    .zmiti-team > div span {
+      margin-right: .5rem; }
 
 /*# sourceMappingURL=result.css.map */

@@ -98,19 +98,23 @@
     position: relative; }
     .zmiti-form .zmiti-form-C .zmiti-city select {
       position: absolute;
-      left: 0;
       top: 0;
       width: 2.3rem;
+      opacity: 1;
+      right: 0;
       opacity: 0; }
     .zmiti-form .zmiti-form-C .zmiti-city .zmiti-pro {
       position: absolute;
-      left: 0;
       font-size: 12px;
       top: 0;
       text-align: center;
       left: 50%;
       -webkit-transform: translateX(-100%);
       transform: translateX(-100%); }
+    .zmiti-form .zmiti-form-C .zmiti-city .zmiti-pro1 {
+      left: 65%;
+      width: 50%;
+      text-align: right; }
     .zmiti-form .zmiti-form-C .zmiti-city div {
       display: -webkit-box;
       -webkit-box-align: center;
@@ -135,8 +139,11 @@
           border-top: 6px solid #000;
           right: .9rem;
           top: .2rem; }
-      .zmiti-form .zmiti-form-C .zmiti-city div span {
-        margin-right: 10px; }
+        .zmiti-form .zmiti-form-C .zmiti-city div > div:nth-of-type(2):before {
+          right: .5rem; }
+      .zmiti-form .zmiti-form-C .zmiti-city div span.zmiti-city-t {
+        position: relative;
+        left: 1.2rem; }
   .zmiti-form .zmiti-form-C .zmiti-form-item2 {
     margin: 20px 0; }
     .zmiti-form .zmiti-form-C .zmiti-form-item2 label {

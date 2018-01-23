@@ -9,6 +9,7 @@
 	text-align: center;
 	font-size: .5rem;
 	@include pos(r);
+	margin-top: 1rem;
 
 	&:before {
 		content: '';
@@ -42,6 +43,7 @@
 
 .zmiti-share-text {
 	width: 9rem;
+	line-height: .8rem;
 	margin: .4rem auto;
 	text-indent: 2em;
 	color: #303030;
@@ -66,15 +68,31 @@
 	width: 5rem;
 	text-align: center;
 	font-size: 12px;
-	@include pos(a);
-	bottom: 3vh;
-	left: 50%;
-	@include transform(translate3d(-50%, 0, 0));
+	margin: 1rem auto;
 
 	img {
 		width: 1rem;
 		display: block;
 		margin: 0 auto;
+	}
+
+}
+
+.zmiti-team {
+	width: 9rem;
+	margin: 1rem auto 0;
+
+	&>div {
+		line-height: .8rem;
+
+		span {
+			margin-right: .5rem;
+
+			&:nth-of-type(1) {
+			}
+
+		}
+
 	}
 
 }

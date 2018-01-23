@@ -32,21 +32,21 @@
 
 					<div class="zmiti-form-item1">
 						<div>
-							<span><label>*</label>孩子居住地(省、县)</span>
+							<span><label>*</label>孩子居住地</span>
 						</div>
 					</div>
 					<div class="zmiti-form-item zmiti-city">
 						<div :style="lineStyle">
 							<div>
 								<section class="zmiti-pro">{{pros1}}</section>
-								<span>省</span>
+								<span class='zmiti-city-t'>省(区、市)</span>
 								<select @change='selectedPro1' >
 									<option v-for='p in province1' :value='p.label'>{{p.label}}</option>
 								</select>
 							</div>
 							
 							<div>
-								<section class="zmiti-pro">{{city1}}</section>
+								<section class="zmiti-pro zmiti-pro1">{{city1}}</section>
 								<span>市</span>
 								<select @change='getAddress1' >
 									<option v-for='p in citys1' :value='p.label'>{{p.label}}</option>
@@ -77,21 +77,21 @@
 
 					<div class="zmiti-form-item1">
 						<div>
-							<span><label>*</label>父母现工作地(省、县)</span>
+							<span><label>*</label>父母现工作地</span>
 						</div>
 					</div>
 					<div class="zmiti-form-item zmiti-city">
 						<div :style="lineStyle">
 							<div>
 								<section class="zmiti-pro">{{pros2}}</section>
-								<span>省</span>
+								<span class='zmiti-city-t'>省(区、市)</span>
 								<select @change='selectedPro2'>
 									<option v-for='p in province2' :value='p.label'>{{p.label}}</option>
 								</select>
 							</div>
 							
 							<div>
-								<section class="zmiti-pro">{{city2}}</section>
+								<section class="zmiti-pro zmiti-pro1">{{city2}}</section>
 								<span>市</span>
 								<select @change='getAddress2' >
 									<option v-for='p in citys2' :value='p.label'>{{p.label}}</option>
@@ -107,7 +107,7 @@
 					<div class="zmiti-form-item2">
 						<div >
 							<div><img :src='imgs.sm'/></div>
-							<textarea placeholder="来说说你的故事和愿景吧" v-model='ajaxData.content'></textarea>
+							<textarea placeholder="来说说你的故事和心愿吧" v-model='ajaxData.content'></textarea>
 						</div>
 					</div>
 					<div class="zmiti-tip">您填写的信息我们为您保密！</div>
@@ -293,6 +293,8 @@
 										mobile:s.ajaxData.mobile
 									}
 								});
+
+								s.obserable.trigger({type:'setResultScroll'})
 
 								var URI = window.location.href.split('#')[0];
 								URI = zmitiUtil.changeURLPar(URI,'mobile',encodeURI(s.ajaxData.mobile))
